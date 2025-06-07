@@ -27,6 +27,17 @@ def compute_statistics(up: pd.Series, max_days: int = 4):
     return lag_corr, cond_prob
 
 
+def analyze_high_low_vs_open(df: pd.DataFrame, up: pd.Series):
+    """Analyze correlation of (high-open) and (low-open) with previous day's up indicator."""
+    high_open = (df['High'] - df['Open']).squeeze()
+    low_open = (df['Low'] - df['Open']).squeeze()
+    up_prev = up.shift(1)
+    corr_high = high_open.corr(up_prev)
+    corr_low = low_open.corr(up_prev)
+    print(f"Correlation (high - open) vs previous day's up: {corr_high:.3f}")
+    print(f"Correlation (low - open) vs previous day's up: {corr_low:.3f}")
+
+
 def analyze_tickers(tickers, start="2024-01-01", end="2025-01-01"):
     for ticker in tickers:
         print(f"--- {ticker} ---")
@@ -42,6 +53,7 @@ def analyze_tickers(tickers, start="2024-01-01", end="2025-01-01"):
         print("Probability next day is up if previous n days were all up:")
         for n, p in cond_prob.items():
             print(f"  {n} days up -> {p:.3f}")
+        analyze_high_low_vs_open(df, up)
         print()
 
 
