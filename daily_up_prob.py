@@ -1,11 +1,5 @@
 import pandas as pd
-import yfinance as yf
-
-
-def get_stock_data(ticker: str, start: str, end: str) -> pd.DataFrame:
-    """Download daily price data for a ticker."""
-    df = yf.download(ticker, start=start, end=end, progress=False)
-    return df
+from data_utils import get_stock_data
 
 
 def compute_up_indicator(df: pd.DataFrame) -> pd.Series:
