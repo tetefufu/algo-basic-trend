@@ -46,4 +46,23 @@ def analyze_tickers(tickers, start="2024-01-01", end="2025-01-01"):
 
 
 if __name__ == "__main__":
-    analyze_tickers(["AAPL", "MSFT", "GOOG"])
+    tickers = [
+        # High volume stocks
+        "AAPL", "MSFT", "GOOG",
+        # Low volume stocks (examples, may change over time)
+        "GNLN", "TIRX", "RHE",
+        # High volume crypto (Yahoo Finance tickers)
+        "BTC-USD", "ETH-USD",
+        # Low volume crypto (examples)
+        "DOGE-USD", "ZRX-USD",
+        # Commodities
+        "GC=F",   # Gold Futures
+        "CL=F",   # Crude Oil Futures
+        "SI=F",   # Silver Futures
+        # Index funds / ETFs
+        "SPY",    # S&P 500 ETF
+        "QQQ",    # Nasdaq 100 ETF
+        "VTI",    # Total Stock Market ETF
+        "EFA",    # MSCI EAFE ETF
+    ]
+    analyze_tickers(tickers)
